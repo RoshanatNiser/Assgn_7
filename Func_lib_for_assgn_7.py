@@ -24,9 +24,9 @@ def f(x,f):
         return a+b+c
 
     if f==2: # for question2 returns g(x)
-        a= float(x**2)
-        c= -float(3)
-        return (a+c)/2
+        a= float(3)
+        c= float(x-2)
+        return a/c
 
 def Bisection(a=1.5,b=3.0,t=0,iter=0,e=10**-6,d=10**-6):
 
@@ -50,7 +50,7 @@ def Bisection(a=1.5,b=3.0,t=0,iter=0,e=10**-6,d=10**-6):
     else:
         return 'No root found in the given interval'
     
-def regular_falsi(a,b,t,iter=0,e=10**-6,d=10**-6):
+def regular_falsi(a,b,t=0,c=0,iter=0,e=10**-6,d=10**-6):
 
     """This function utilises sthe Regular Falsi method 
     to find roots of a monotonic function."""
@@ -78,23 +78,27 @@ def regular_falsi(a,b,t,iter=0,e=10**-6,d=10**-6):
                     return regular_falsi(a=c_new,b=b,c=c_new,t=t,iter=iter_new)
             
     else:
-        return 0,0
+        return 'No root found in the given interval'
 
 
-def fixed_point(x=0,t=2,iter=0,e=10**-6,max_iter=1000):
+def fixed_point(x,t=2,e=10**-6,max_iter=100):
     """This Function returns roots of a 
     function employing Fixed point Method"""
-
     for i in range(max_iter):
         # Iteration step
         x_new = f(x,t)
-        iter_new = iter + 1
-
-        # Checking convergence
-        if abs(x_new - x) < e:
-            return float(x_new),float(iter_new)
     
+        # Checking convergence
+        if  abs(x_new - x) < e or abs(f(x_new,t))<e :
+            return x_new,i
+            
+        else:
+            x=x_new
+            continue
 
+    return x,max_iter
+
+    
 def newton_raphson(x=2,t_0=0,t_1=1,iter=0,e=10**-6,d=10**-6):
     """This Function returns roots of a 
     function employing Newton-Raphson Method"""
