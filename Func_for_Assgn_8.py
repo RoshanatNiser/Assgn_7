@@ -134,7 +134,7 @@ def Newton_Raphson(X, J_func, f, e=10**-6, max_iter=100):
         # Jacobian Matrix
         J_matrix = J_func(X)
         
-        # Inverse of Jacobian
+        # Inverse of Jacobian through Gauss Jorden Method
         J = matrix(J_matrix)
         J_inv = J.gauss_jorden()
         
@@ -158,4 +158,5 @@ def Newton_Raphson(X, J_func, f, e=10**-6, max_iter=100):
             return Y, i + 1
         
         X = Y[:]  
+
     return X, max_iter
